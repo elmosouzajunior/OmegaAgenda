@@ -9,6 +9,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using OmegaAgenda.Data;
 
 namespace OmegaAgenda
 {
@@ -33,6 +35,10 @@ namespace OmegaAgenda
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddDbContext<OmegaAgendaContext>(options =>
+                    options.UseMySql(Configuration.GetConnectionString("OmegaAgendaContext"), builder => 
+                        builder.MigrationsAssembly("OmegaAgenda")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
