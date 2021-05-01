@@ -15,5 +15,8 @@ namespace OmegaAgenda.Data
         }
 
         public DbSet<OmegaAgenda.Models.Professional> Professional { get; set; }
+        public DbSet<OmegaAgenda.Models.Customer> Customer { get; set; }
+        public DbSet<OmegaAgenda.Models.Scheduling> Scheduling { get; set; }
+        public DbSet<OmegaAgenda.Models.Service> Service { get; set; }
     }
 }
