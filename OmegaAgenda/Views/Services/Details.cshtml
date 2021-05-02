@@ -1,0 +1,30 @@
+﻿@model OmegaAgenda.Models.Service
+
+@{
+    ViewData["Title"] = "Detalhes do Serviço";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Nome do Serviço: </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ServiceName)
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>Descrição do Serviço: </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ServiceDescription)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" class="btn btn-default" asp-route-id="@Model.Id">Editar</a>
+</div>
+<br />
+<div>
+    <a asp-action="Index">Voltar para lista</a>
+</div>
