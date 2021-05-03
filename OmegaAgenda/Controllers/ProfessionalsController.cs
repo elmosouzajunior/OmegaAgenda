@@ -7,24 +7,28 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OmegaAgenda.Data;
 using OmegaAgenda.Models;
+using OmegaAgenda.Services;
 
 namespace OmegaAgenda.Controllers
 {
     public class ProfessionalsController : Controller
     {
         private readonly OmegaAgendaContext _context;
+        private readonly ProfessionalService _professionalService;
 
-        public ProfessionalsController(OmegaAgendaContext context)
+        public ProfessionalsController(OmegaAgendaContext context, ProfessionalService professionalService)
         {
             _context = context;
+            _professionalService = professionalService;
         }
 
         // GET: Professionals
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Professional.ToListAsync());
+            var list = await _professionalService.FindAllAsync();
+            return View(list);
         }
-
+        
         // GET: Professionals/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -49,7 +53,7 @@ namespace OmegaAgenda.Controllers
             return View();
         }
 
-        // POST: Professionals/Create
+        // POST: Services/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]

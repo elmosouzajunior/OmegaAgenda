@@ -1,36 +1,32 @@
 ﻿@model OmegaAgenda.Models.Customer
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalhes";
 }
 
-<h2>Details</h2>
+<h2>@ViewData["Title"]</h2>
 
 <div>
-    <h4>Customer</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+        <dt>Nome: </dt>
         <dd>
             @Html.DisplayFor(model => model.Name)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
+        <dt>E-mail: </dt>
         <dd>
             @Html.DisplayFor(model => model.Email)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
+        <dt>Celular: </dt>
         <dd>
             @Html.DisplayFor(model => model.PhoneNumber)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" class="btn btn-success" asp-route-id="@Model.Id">Editar</a>
+</div>
+<br />
+<div>
+    <a asp-action="Index">Voltar para lista</a>
 </div>

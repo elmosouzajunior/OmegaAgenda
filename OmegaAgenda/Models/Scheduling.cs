@@ -8,7 +8,10 @@ namespace OmegaAgenda.Models
     {
         public int Id { get; set; }
         public Professional Professional { get; set; }
-        public Customer CustomerName { get; set; }
+        public int ProfessionalId { get; set; }
+        public Customer Customer { get; set; }
+        public int CustomerId { get; set; }
+        public DateTime Date { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public ICollection<Service> Services { get; set; } = new List<Service>();
@@ -18,11 +21,12 @@ namespace OmegaAgenda.Models
         {
         }
 
-        public Scheduling(int id, Professional professional, Customer customerName, DateTime startTime, DateTime endTime, SchedulingStatus status)
+        public Scheduling(int id, Professional professional, Customer customer, DateTime date ,DateTime startTime, DateTime endTime, SchedulingStatus status)
         {
             Id = id;
             Professional = professional;
-            CustomerName = customerName;
+            Customer = customer;
+            Date = date;
             StartTime = startTime;
             EndTime = endTime;
             Status = status;

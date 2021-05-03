@@ -5,12 +5,9 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using OmegaAgenda.Data;
+using OmegaAgenda.Services;
 
 namespace OmegaAgenda
 {
@@ -41,6 +38,7 @@ namespace OmegaAgenda
                         builder.MigrationsAssembly("OmegaAgenda")));
 
             services.AddScoped<SeedingService>();
+            services.AddScoped<ProfessionalService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

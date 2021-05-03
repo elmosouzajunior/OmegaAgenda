@@ -1,24 +1,24 @@
 ﻿@model OmegaAgenda.Models.Professional
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalhes";
 }
 
-<h2>Details</h2>
+<h2>@ViewData["Title"]</h2>
 
 <div>
-    <h4>Professional</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+        <dt>Nome do Profissional:</dt>
         <dd>
             @Html.DisplayFor(model => model.Name)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" class="btn btn-sucess" asp-route-id="@Model.Id">Editar</a>
+</div>
+<br />
+<div>
+    <a asp-action="Index">Voltar para lista</a>
 </div>

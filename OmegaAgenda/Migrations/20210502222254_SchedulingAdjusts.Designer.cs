@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OmegaAgenda.Data;
 
 namespace OmegaAgenda.Migrations
 {
     [DbContext(typeof(OmegaAgendaContext))]
-    partial class OmegaAgendaContextModelSnapshot : ModelSnapshot
+    [Migration("20210502222254_SchedulingAdjusts")]
+    partial class SchedulingAdjusts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,13 +52,13 @@ namespace OmegaAgenda.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("CustomerId");
+                    b.Property<int?>("CustomerNameId");
 
                     b.Property<DateTime>("Date");
 
                     b.Property<DateTime>("EndTime");
 
-                    b.Property<int>("ProfessionalId");
+                    b.Property<int?>("ProfessionalId");
 
                     b.Property<DateTime>("StartTime");
 
@@ -64,7 +66,7 @@ namespace OmegaAgenda.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("CustomerNameId");
 
                     b.HasIndex("ProfessionalId");
 
@@ -91,15 +93,13 @@ namespace OmegaAgenda.Migrations
 
             modelBuilder.Entity("OmegaAgenda.Models.Scheduling", b =>
                 {
-                    b.HasOne("OmegaAgenda.Models.Customer", "Customer")
+                    b.HasOne("OmegaAgenda.Models.Customer", "CustomerName")
                         .WithMany("Schedules")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("CustomerNameId");
 
                     b.HasOne("OmegaAgenda.Models.Professional", "Professional")
                         .WithMany("Schedules")
-                        .HasForeignKey("ProfessionalId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ProfessionalId");
                 });
 
             modelBuilder.Entity("OmegaAgenda.Models.Service", b =>

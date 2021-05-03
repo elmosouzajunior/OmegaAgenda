@@ -54,7 +54,7 @@ namespace OmegaAgenda.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,StartTime,EndTime,Status")] Scheduling scheduling)
+        public async Task<IActionResult> Create([Bind("Id,Date,StartTime,EndTime,Status")] Scheduling scheduling)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace OmegaAgenda.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,StartTime,EndTime,Status")] Scheduling scheduling)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Date,StartTime,EndTime,Status")] Scheduling scheduling)
         {
             if (id != scheduling.Id)
             {
