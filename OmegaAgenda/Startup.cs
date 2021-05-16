@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using OmegaAgenda.Data;
-using OmegaAgenda.Services;
+using OmegaAgenda.InternalServices;
 
 namespace OmegaAgenda
 {

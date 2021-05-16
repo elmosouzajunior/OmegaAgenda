@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OmegaAgenda.Data;
 using OmegaAgenda.Models;
-using OmegaAgenda.Services;
+using OmegaAgenda.InternalServices;
 
 namespace OmegaAgenda.Controllers
 {
