@@ -38,9 +38,10 @@ namespace OmegaAgenda
                         builder.MigrationsAssembly("OmegaAgenda")));
 
             services.AddScoped<SeedingService>();
-            services.AddScoped<ProfessionalService>();
+            services.AddScoped<ProfessionalServices>();
             services.AddScoped<ServiceServices>();
             services.AddScoped<CustomerServices>();
+            services.AddScoped<SchedulingServices>();
 
         }
 

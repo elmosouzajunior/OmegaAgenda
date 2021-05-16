@@ -25,8 +25,8 @@ namespace OmegaAgenda.Controllers
         // GET: Customers
         public async Task<IActionResult> Index()
         {
-            var list = _customerServices.FindAllAsync();
-            return View(await list);
+            var list = await _customerServices.FindAllAsync();
+            return View(list);
         }
 
         // GET: Customers/Details/5
@@ -37,8 +37,7 @@ namespace OmegaAgenda.Controllers
                 return NotFound();
             }
 
-            var customer = await _context.Customer
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var customer = await _customerServices.FindByIdAsync(id.Value);
             if (customer == null)
             {
                 return NotFound();
@@ -58,7 +57,7 @@ namespace OmegaAgenda.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Email,PhoneNumber")] Customer customer)
+        public async Task<IActionResult> Create([Bind("Id,Name")] Customer customer)
         {
             if (ModelState.IsValid)
             {

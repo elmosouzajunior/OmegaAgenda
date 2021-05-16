@@ -6,23 +6,36 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OmegaAgenda.Data;
+using OmegaAgenda.InternalServices;
 using OmegaAgenda.Models;
+using OmegaAgenda.Models.ViewModels;
 
 namespace OmegaAgenda.Controllers
 {
     public class SchedulingsController : Controller
     {
         private readonly OmegaAgendaContext _context;
+        private readonly SchedulingServices _schedulingServices;
+        private readonly ProfessionalServices _professionalServices;
+        private readonly CustomerServices _customerServices;
 
-        public SchedulingsController(OmegaAgendaContext context)
+        public SchedulingsController(
+            OmegaAgendaContext context, 
+            SchedulingServices schedulingServices,
+            ProfessionalServices professionalServices,
+            CustomerServices customerServices)
         {
             _context = context;
+            _schedulingServices = schedulingServices;
+            _professionalServices = professionalServices;
+            _customerServices = customerServices;
         }
 
         // GET: Schedulings
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Scheduling.ToListAsync());
+            var list = await _schedulingServices.FindAllAsync();
+            return View(list);
         }
 
         // GET: Schedulings/Details/5
@@ -33,8 +46,7 @@ namespace OmegaAgenda.Controllers
                 return NotFound();
             }
 
-            var scheduling = await _context.Scheduling
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var scheduling = await _schedulingServices.FindByIdAsync(id.Value);
             if (scheduling == null)
             {
                 return NotFound();
@@ -44,9 +56,12 @@ namespace OmegaAgenda.Controllers
         }
 
         // GET: Schedulings/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            return View();
+            var professionals = await _professionalServices.FindAllAsync();
+            var customers = await _customerServices.FindAllAsync();
+            var viewModel = new SchedulingFormViewModel { Professionals = professionals, Customers = customers };
+            return View(viewModel);
         }
 
         // POST: Schedulings/Create
@@ -54,19 +69,21 @@ namespace OmegaAgenda.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Date,StartTime,EndTime,Status")] Scheduling scheduling)
+        public async Task<IActionResult> Create(Scheduling scheduling)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _context.Add(scheduling);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var professionals = await _professionalServices.FindAllAsync();
+                var customers = await _customerServices.FindAllAsync();
+                var viewModel = new SchedulingFormViewModel { Professionals = professionals, Customers = customers };
+                return View(viewModel);
             }
-            return View(scheduling);
+            await _schedulingServices.InsertAsync(scheduling);
+            return RedirectToAction(nameof(Index));
         }
 
-        // GET: Schedulings/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+            // GET: Schedulings/Edit/5
+            public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -124,14 +141,13 @@ namespace OmegaAgenda.Controllers
                 return NotFound();
             }
 
-            var scheduling = await _context.Scheduling
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (scheduling == null)
+            var obj = await _schedulingServices.FindByIdAsync(id.Value);
+            if (obj == null)
             {
                 return NotFound();
             }
 
-            return View(scheduling);
+            return View(obj);
         }
 
         // POST: Schedulings/Delete/5

@@ -23,10 +23,10 @@ namespace OmegaAgenda.Controllers
         }
 
         // GET: Services
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var list = _serviceServices.FindAllAsync();
-            return View(await list);
+            var list = _serviceServices.FindAll();
+            return View(list);
         }
 
         // GET: Services/Details/5

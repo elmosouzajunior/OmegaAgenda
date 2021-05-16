@@ -1,4 +1,4 @@
-﻿@model OmegaAgenda.Models.Scheduling
+﻿@model OmegaAgenda.Models.ViewModels.SchedulingFormViewModel
 
 @{
     ViewData["Title"] = "Criar Agendamento";
@@ -12,30 +12,28 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Professional" class="control-label"></label>
-                <input asp-for="Professional" class="form-control" />
-                <span asp-validation-for="Professional" class="text-danger"></span>
+                <label asp-for="Scheduling.ProfessionalId" class="control-label"></label>
+                <select asp-for="Scheduling.ProfessionalId" asp-items="@(new SelectList(Model.Professionals,"Id","Name"))" class="form-control"></select>
             </div>
             <div class="form-group">
-                <label asp-for="Customer" class="control-label"></label>
-                <input asp-for="Customer" class="form-control" />
-                <span asp-validation-for="Customer" class="text-danger"></span>
+                <label asp-for="Scheduling.CustomerId" class="control-label"></label>
+                <select asp-for="Scheduling.CustomerId" asp-items="@(new SelectList(Model.Customers,"Id","Name"))" class="form-control"></select>
             </div>
             <div class="form-group">
-                <label asp-for="Date" class="control-label"></label>
-                <input asp-for="Date" class="form-control" />
-                <span asp-validation-for="Date" class="text-danger"></span>
+                <label asp-for="Scheduling.Date" class="control-label"></label>
+                <input asp-for="Scheduling.Date" class="form-control" />
+                <span asp-validation-for="Scheduling.Date" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="StartTime" class="control-label"></label>
-                <input asp-for="StartTime" class="form-control" />
-                <span asp-validation-for="StartTime" class="text-danger"></span>
+                <label asp-for="Scheduling.StartTime" class="control-label"></label>
+                <input asp-for="Scheduling.StartTime" class="form-control" />
+                <span asp-validation-for="Scheduling.StartTime" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="EndTime" class="control-label"></label>
-                <input asp-for="EndTime" class="form-control" />
-                <span asp-validation-for="EndTime" class="text-danger"></span>
-            </div>            
+                <label asp-for="Scheduling.EndTime" class="control-label"></label>
+                <input asp-for="Scheduling.EndTime" class="form-control" />
+                <span asp-validation-for="Scheduling.EndTime" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>

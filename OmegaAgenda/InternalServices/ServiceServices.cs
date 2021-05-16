@@ -17,9 +17,9 @@ namespace OmegaAgenda.InternalServices
             _context = context;
         }
 
-        public async Task<List<Service>> FindAllAsync()
+        public List<Service> FindAll()
         {
-            return await _context.Service.OrderBy(x => x.ServiceName).ToListAsync();
+            return _context.Service.OrderBy(x => x.ServiceName).ToList();
         }
     }
 }

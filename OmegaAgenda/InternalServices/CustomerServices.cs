@@ -21,5 +21,16 @@ namespace OmegaAgenda.InternalServices
         {
             return await _context.Customer.OrderBy(x => x.Name).ToListAsync();
         }
+
+        public async Task<Customer> FindByIdAsync(int id)
+        {
+            return await _context.Customer.FirstOrDefaultAsync(obj => obj.Id == id);
+        }
+
+        public async Task InsertAsync(Customer obj)
+        {
+            _context.Add(obj);
+            await _context.SaveChangesAsync();
+        }
     }
 }

@@ -14,9 +14,9 @@ namespace OmegaAgenda.Controllers
     public class ProfessionalsController : Controller
     {
         private readonly OmegaAgendaContext _context;
-        private readonly ProfessionalService _professionalService;
+        private readonly ProfessionalServices _professionalService;
 
-        public ProfessionalsController(OmegaAgendaContext context, ProfessionalService professionalService)
+        public ProfessionalsController(OmegaAgendaContext context, ProfessionalServices professionalService)
         {
             _context = context;
             _professionalService = professionalService;
@@ -28,7 +28,7 @@ namespace OmegaAgenda.Controllers
             var list = await _professionalService.FindAllAsync();
             return View(list);
         }
-        
+
         // GET: Professionals/Details/5
         public async Task<IActionResult> Details(int? id)
         {

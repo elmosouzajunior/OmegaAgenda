@@ -1,36 +1,39 @@
 ﻿@model OmegaAgenda.Models.Scheduling
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalhes do Agendamento";
 }
 
-<h2>Details</h2>
+<h2>@ViewData["Title"]</h2>
 
 <div>
-    <h4>Scheduling</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.StartTime)
-        </dt>
+        <dt>Profissional:</dt>
+        <dd>
+            @Html.DisplayFor(model => model.Professional.Name)
+        </dd>
+        <dt>Cliente:</dt>
+        <dd>
+            @Html.DisplayFor(model => model.Customer.Name)
+        </dd>
+        <dt>Data:</dt>
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+        <dt>Horário de Início:</dt>
         <dd>
             @Html.DisplayFor(model => model.StartTime)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.EndTime)
-        </dt>
+        <dt>Horário do Término:</dt>
         <dd>
             @Html.DisplayFor(model => model.EndTime)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Status)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-default">Editar</a>
+    <br />
+    <br />
+    <a asp-action="Index">Voltar para lista</a>
 </div>

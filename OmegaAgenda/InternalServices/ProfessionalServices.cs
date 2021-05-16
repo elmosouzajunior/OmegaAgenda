@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace OmegaAgenda.InternalServices
 {
-    public class ProfessionalService
+    public class ProfessionalServices
     {
         private readonly OmegaAgendaContext _context;
 
-        public ProfessionalService(OmegaAgendaContext context)
+        public ProfessionalServices(OmegaAgendaContext context)
         {
             _context = context;
         }
