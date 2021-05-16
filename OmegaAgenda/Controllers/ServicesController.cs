@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OmegaAgenda.Data;
+using OmegaAgenda.InternalServices;
 using OmegaAgenda.Models;
 
 namespace OmegaAgenda.Controllers
@@ -13,16 +14,19 @@ namespace OmegaAgenda.Controllers
     public class ServicesController : Controller
     {
         private readonly OmegaAgendaContext _context;
+        private readonly ServiceServices _serviceServices;
 
-        public ServicesController(OmegaAgendaContext context)
+        public ServicesController(OmegaAgendaContext context, ServiceServices serviceServices)
         {
             _context = context;
+            _serviceServices = serviceServices;
         }
 
         // GET: Services
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Service.ToListAsync());
+            var list = _serviceServices.FindAllAsync();
+            return View(await list);
         }
 
         // GET: Services/Details/5
