@@ -40,6 +40,8 @@ namespace OmegaAgenda
             services.AddScoped<SeedingService>();
             services.AddScoped<ProfessionalService>();
             services.AddScoped<ServiceServices>();
+            services.AddScoped<CustomerServices>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
