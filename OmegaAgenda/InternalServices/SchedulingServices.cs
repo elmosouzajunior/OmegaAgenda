@@ -19,7 +19,10 @@ namespace OmegaAgenda.InternalServices
 
         public async Task<List<Scheduling>> FindAllAsync()
         {
-            return await _context.Scheduling.ToListAsync();
+            return await _context.Scheduling
+                .Include(obj => obj.Customer)
+                .Include(obj => obj.Professional)
+                .ToListAsync();
         }
 
         public async Task InsertAsync(Scheduling obj)
